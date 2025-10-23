@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.title }} - Vansh Soni{% endblock %}
+
+{% block content %}
+<div class="py-8">
+    <div class="space-y-12 mt-12 px-6 md:px-12">
+        
+        {% if project.main_image %}
+            <img src="{{ project.main_image.url }}" alt="{{ project.title }} banner" class="w-full aspect-video object-cover rounded-lg mb-8">
+        {% else %}
+            <img src="{{ project.thumbnail.url }}" alt="{{ project.title }} banner" class="w-full aspect-video object-cover rounded-lg mb-8">
+        {% endif %}
+
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ project.title }}</h1>
+        
+        <div class="flex flex-wrap gap-x-6 gap-y-2 text-lg text-zinc-400 mb-6">
+            <span><strong>Category:</strong> {{ project.category.name }}</span>
+            
+            <span><strong>Date:</strong> {{ project.date_completed|date:"F j, Y" }}</span>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-2">Technologies Used:</h3>
+            <div class="flex flex-wrap gap-2">
+                {% for tech in project.technology_list %}
+                <span class="bg-zinc-700 text-zinc-200 py-1 px-3 rounded-full text-sm font-semibold 
+                             hover:bg-red-600 transition-colors cursor-default">
+                    {{ tech }}
+                </span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="prose prose-invert prose-lg max-w-none">
+            {{ project.detailed_description|linebreaksbr }}
+        </div>
+        
+        <div class="mt-12 flex flex-wrap gap-4">
+            {% if project.project_link %}
+            <a href="{{ project.project_link }}" target="_blank" class="bg-red-600 text-white font-bold py-2 px-6 rounded hover:bg-red-700 transition-all">
+                View Live Project
+            </a>
+            {% endif %}
+            
+            <a href="{% url 'home' %}" class="bg-gray-500 bg-opacity-70 text-white font-bold py-2 px-6 rounded hover:bg-opacity-50 transition-all">
+                &larr; Back to Portfolio
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

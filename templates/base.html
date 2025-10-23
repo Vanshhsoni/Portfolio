@@ -1,0 +1,60 @@
+{% load static %} <!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Vansh Soni - Portfolio{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'sans': ['Inter', 'sans-serif'],
+              // 'netflix': ['"Netflix Font"', 'sans-serif'] // Can remove this too if only logo uses it
+            }
+          },
+        },
+        plugins: [
+          require('@tailwindcss/typography'),
+        ],
+      }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-zinc-900 text-gray-100 font-sans">
+
+    <header class="p-4 md:p-4">
+        <nav class="flex justify-between items-center">
+            
+            <a href="{% url 'home' %}" class="block"> <img src="{% static 'logo.png' %}" alt="Vansh Soni Logo" class="h-8 md:h-10"> </a>
+
+            <div class="flex items-center space-x-4">
+                <span class="hidden md:block">Graphic Designer & Web Developer</span>
+                
+                <a href= "{% url 'about' %}" class="bg-red-600 text-white text-sm font-semibold py-2 px-4 rounded hover:bg-red-700 transition-colors">
+                    Contact Me
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="text-center p-12 text-zinc-500 mt-12">
+        &copy; 2025 Vansh Soni. All rights reserved.
+    </footer>
+
+</body>
+</html>
